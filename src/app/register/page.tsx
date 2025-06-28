@@ -1,0 +1,82 @@
+"use client";
+import { useState } from "react";
+import axios from "@/lib/axios";
+
+export default function RegisterPage() {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+    country: "",
+  });
+  const [error, setError] = useState("");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+
+    try {
+      const res = await axios.post("/auth/register", form);
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+      window.location.href = "/";
+    } catch (err: any) {
+      setError(err.response?.data?.message || "Registration failed");
+    }
+  };
+
+  return (
+    <div className="flex justify-center items-center min-h-screen">
+      <form onSubmit={handleSubmit} className="p-6 rounded shadow-md w-96">
+        <h2 className="text-2xl font-bold mb-4">Register</h2>
+        {error && <p className="text-red-500 mb-3">{error}</p>}
+
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
+          className="w-full p-2 border mb-3"
+          value={form.name}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          className="w-full p-2 border mb-3"
+          value={form.email}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          className="w-full p-2 border mb-3"
+          value={form.password}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="text"
+          name="country"
+          placeholder="Country"
+          className="w-full p-2 border mb-3"
+          value={form.country}
+          onChange={handleChange}
+        />
+        <button
+          type="submit"
+          className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded w-full"
+        >
+          Register
+        </button>
+      </form>
+    </div>
+  );
+}

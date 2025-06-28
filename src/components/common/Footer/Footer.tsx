@@ -1,0 +1,12 @@
+"use client";
+
+import Link from "next/link";
+
+export default function Footer() {
+  return (
+    <footer className="flex flex-col items-center justify-center bg-white dark:bg-gray-800 py-4">
+      <p>© {new Date().getFullYear()} MovieZone</p>
+      <Link href="https://github.com/devbn3li">devbn3li</Link>
+    </footer>
+  );
+}
