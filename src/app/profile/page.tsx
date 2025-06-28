@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 const Profile = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [user, setUser] = useState<any>(null);
 
   useEffect(() => {

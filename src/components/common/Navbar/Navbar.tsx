@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function Navbar() {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [user, setUser] = useState<any>(null);
   const [open, setOpen] = useState(false);
   const router = useRouter();
@@ -17,7 +18,9 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleClickOutside = (event: any) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       if (dropdownRef.current && !(dropdownRef.current as any).contains(event.target)) {
         setOpen(false);
       }

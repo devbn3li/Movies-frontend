@@ -24,6 +24,7 @@ export default function RegisterPage() {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
       window.location.href = "/";
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err.response?.data?.message || "Registration failed");
     }
