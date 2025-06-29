@@ -32,7 +32,7 @@ jobs:
           [ -d .next/static ] && mkdir -p deploy/.next && cp -r .next/static deploy/.next/static
           cp -r public deploy/public || true
           cp package.json deploy/
-          cp next.config.js deploy/
+          cp next.config.ts deploy/
       - name: Zip deploy folder
         run: cd deploy && zip -r ../release.zip .
 
