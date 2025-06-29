@@ -20,6 +20,9 @@ jobs:
         with:
           node-version: '22.x'
 
+      - name: Update npm
+        run: npm install -g npm@11.4.2
+
       - name: Install dependencies and build
         run: |
           npm install
@@ -33,6 +36,8 @@ jobs:
           cp -r public deploy/public || true
           cp package.json deploy/
           cp next.config.ts deploy/
+          cp -r node_modules deploy/node_modules
+
       - name: Zip deploy folder
         run: cd deploy && zip -r ../release.zip .
 
