@@ -40,7 +40,7 @@ export default function Navbar() {
   return (
     <div className="p-4 flex justify-between items-center border-b border-[#333333] px-20">
       <Link href="/" className="text-xl font-bold">
-        MyMovies
+        MovieZone
       </Link>
 
       <div className="flex items-center gap-4 relative" ref={dropdownRef}>
