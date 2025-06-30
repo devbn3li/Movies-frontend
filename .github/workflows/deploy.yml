@@ -17,7 +17,10 @@ jobs:
           username: azureuser
           key: ${{ secrets.VMKEY }}
           script: |
-            cd movie-front
+            cd movies-frontend
             git pull
             npm install
-            pm2 restart movies-frontend
+            npm run build
+            pm2 delete movies-frontend || true
+            pm2 start npm --name "movies-frontend" -- run start
+            pm2 save
