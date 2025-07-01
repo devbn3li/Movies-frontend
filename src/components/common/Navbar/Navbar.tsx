@@ -38,9 +38,9 @@ export default function Navbar() {
   };
 
   return (
-    <div className="p-4 flex justify-between items-center border-b border-[#333333] px-20">
+    <div className="p-4 flex justify-between items-center border-b border-[#333333] sm:px-20 sticky top-0 dark:bg-black bg-white z-50">
       <Link href="/" className="text-xl font-bold">
-        MovieZone
+        Movie Zone
       </Link>
 
       <div className="flex items-center gap-4 relative" ref={dropdownRef}>
@@ -68,6 +68,15 @@ export default function Navbar() {
                 >
                   Profile
                 </Link>
+                {user.isAdmin && (
+                <Link
+                  href="/dashboard"
+                  className="block px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
+                  onClick={() => setOpen(false)}
+                >
+                  Dashboard
+                </Link>
+                )}
                 <button
                   onClick={handleLogout}
                   className="w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
