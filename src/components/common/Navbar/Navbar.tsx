@@ -4,11 +4,22 @@ import ThemeToggle from "@/components/ThemeToggle";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+  DropdownMenuGroup,
+  DropdownMenuShortcut,
+} from "@/components/ui/dropdown-menu"
+import { LuLogOut } from "react-icons/lu";
+import { Button } from "@/components/ui/button";
 
 export default function Navbar() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [user, setUser] = useState<any>(null);
-  const [open, setOpen] = useState(false);
   const router = useRouter();
   const dropdownRef = useRef(null);
 
@@ -17,17 +28,6 @@ export default function Navbar() {
     if (userData) setUser(JSON.parse(userData));
   }, []);
 
-  useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const handleClickOutside = (event: any) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      if (dropdownRef.current && !(dropdownRef.current as any).contains(event.target)) {
-        setOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -47,53 +47,61 @@ export default function Navbar() {
         <ThemeToggle />
 
         {user ? (
-          <div className="relative">
-            <Image
-              src={user.avatar || "/Images/default.png"}
-              alt="Avatar"
-              width={36}
-              height={36}
-              className="rounded-full border cursor-pointer"
-              onClick={() => setOpen((prev) => !prev)}
-            />
-            {open && (
-              <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 border rounded shadow z-50 p-2">
-                <div className="px-3 py-2 border-b text-sm text-gray-700 dark:text-white">
-                  {user.name}
-                </div>
-                <Link
-                  href="/profile"
-                  className="block px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
-                  onClick={() => setOpen(false)}
-                >
-                  Profile
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Image
+                src={user.avatar || "/Images/default.png"}
+                alt="Avatar"
+                width={36}
+                height={36}
+                className="rounded-full border cursor-pointer"
+              />
+            </DropdownMenuTrigger>
+
+            <DropdownMenuContent className="w-56" align="end">
+              <DropdownMenuLabel>{user.name}</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+
+              <DropdownMenuGroup>
+                <Link href="/profile" passHref>
+                  <DropdownMenuItem>
+                    Profile
+                  </DropdownMenuItem>
                 </Link>
+
                 {user.isAdmin && (
-                <Link
-                  href="/dashboard"
-                  className="block px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
-                  onClick={() => setOpen(false)}
-                >
-                  Dashboard
-                </Link>
+                  <Link href="/dashboard" passHref>
+                    <DropdownMenuItem>
+                      Dashboard
+                    </DropdownMenuItem>
+                  </Link>
                 )}
-                <button
-                  onClick={handleLogout}
-                  className="w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
-                >
-                  Logout
-                </button>
-              </div>
-            )}
-          </div>
+              </DropdownMenuGroup>
+
+              <DropdownMenuSeparator />
+
+              <DropdownMenuItem
+                onSelect={() => {
+                  handleLogout();
+                }}
+                className="text-red-600"
+              >
+                Log out
+                <DropdownMenuShortcut><LuLogOut /></DropdownMenuShortcut>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         ) : (
-          <Link
-            href="/login"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
-          >
-            Register / Login
-          </Link>
+          <Button>
+            <Link
+              href="/login"
+              className=" px-4 py-2 rounded"
+            >
+              Register / Login
+            </Link>
+          </Button>
         )}
+
       </div>
     </div>
   );

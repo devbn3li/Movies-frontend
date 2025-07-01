@@ -24,13 +24,13 @@ export default function MoviePage() {
   return (
     <div className="flex flex-col items-center p-6 sm:w-[520px] mx-auto">
       <div className="mb-4">
-        <Image
-          src={item.backdrop_url || item.poster_url}
-          alt={title}
-          className="object-cover rounded mb-4"
-          width={500}
-          height={300}
-        />
+          <Image
+            src={item.backdrop_url || item.poster_url}
+            alt={title}
+            className="object-cover rounded mb-4"
+            width={500}
+            height={300}
+          />
       </div>
       <div className="flex items-center justify-between gap-5 mb-4 w-full">
         <h1 className="text-2xl font-bold">{title}</h1>

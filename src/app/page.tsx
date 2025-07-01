@@ -66,8 +66,9 @@ export default function HomePage() {
           setPage(1);
           setSearch("");
         }}
+        
       >
-        <TabsList>
+        <TabsList className="w-full flex justify-center gap-5 px-[5px]">
           <TabsTrigger value="movies">Movies</TabsTrigger>
           <TabsTrigger value="tv">TV Shows</TabsTrigger>
         </TabsList>
@@ -165,7 +166,7 @@ function CardsGrid({
           {Array.from({ length: ITEMS_PER_PAGE }).map((_, index) => (
             <div
               key={`skeleton-${index}`}
-              className="flex flex-col justify-center items-center bg-white dark:bg-black rounded-lg p-3 w-fit"
+              className="flex flex-col justify-center items-center bg-white dark:bg-black rounded-lg p-3 w-fit mx-auto"
             >
               <Skeleton className="rounded h-[450px] w-[320px] mb-2" />
               <Skeleton className="w-24 h-4 mt-2" />
@@ -190,12 +191,12 @@ function CardsGrid({
           <Link
             href={`/movies/${item.id}`}
             key={item.id}
-            className="flex flex-col justify-center items-center bg-white dark:bg-black rounded-lg p-3 w-fit mx-auto"
+            className="flex flex-col justify-center items-center bg-white dark:bg-black rounded-lg p-3 mx-auto"
           >
             <Image
               src={item.poster_url}
               alt={"title" in item ? item.title : item.name}
-              width={320}
+              width={330}
               height={450}
               className="rounded object-cover mb-2"
             />
