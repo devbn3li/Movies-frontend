@@ -170,9 +170,9 @@ function CardsGrid({
           {Array.from({ length: ITEMS_PER_PAGE }).map((_, index) => (
             <div
               key={`skeleton-${index}`}
-              className="flex flex-col justify-center items-center bg-white dark:bg-black rounded-lg p-3 w-fit mx-auto"
+              className="flex flex-col justify-center items-center bg-white dark:bg-black rounded-lg p-3 mx-auto"
             >
-              <Skeleton className="rounded h-[450px] w-[320px] mb-2" />
+              <Skeleton className="rounded h-[450px] w-[330px] mb-2" />
               <Skeleton className="w-24 h-4 mt-2" />
               <Skeleton className="w-10 h-4 mt-2" />
             </div>
