@@ -14,7 +14,7 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="relative inline-flex items-center h-8 rounded-full w-14 bg-gray-300 dark:bg-gray-700 transition-colors"
+      className="relative inline-flex items-center h-8 rounded-full w-14 bg-gray-300 dark:bg-gray-700 transition-colors max-sm:hidden"
     >
       <span
         className={`${

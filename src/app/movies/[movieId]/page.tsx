@@ -22,7 +22,7 @@ export default function MoviePage() {
 
   const title = "title" in item ? item.title : item.name;
   return (
-    <div className="flex flex-col items-center p-6 w-[520px] mx-auto">
+    <div className="flex flex-col items-center p-6 sm:w-[520px] mx-auto">
       <div className="mb-4">
         <Image
           src={item.backdrop_url || item.poster_url}

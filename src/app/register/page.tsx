@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 import axios from "@/lib/axios";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button"
 
 export default function RegisterPage() {
   const [form, setForm] = useState({
@@ -31,12 +33,11 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <form onSubmit={handleSubmit} className="p-6 rounded shadow-md w-96">
+    <div className="flex justify-center items-center">
+      <form onSubmit={handleSubmit} className="p-6 rounded w-96">
         <h2 className="text-2xl font-bold mb-4">Register</h2>
         {error && <p className="text-red-500 mb-3">{error}</p>}
-
-        <input
+        <Input
           type="text"
           name="name"
           placeholder="Name"
@@ -45,7 +46,7 @@ export default function RegisterPage() {
           onChange={handleChange}
           required
         />
-        <input
+        <Input
           type="email"
           name="email"
           placeholder="Email"
@@ -54,7 +55,7 @@ export default function RegisterPage() {
           onChange={handleChange}
           required
         />
-        <input
+        <Input
           type="password"
           name="password"
           placeholder="Password"
@@ -63,7 +64,7 @@ export default function RegisterPage() {
           onChange={handleChange}
           required
         />
-        <input
+        <Input
           type="text"
           name="country"
           placeholder="Country"
@@ -71,12 +72,12 @@ export default function RegisterPage() {
           value={form.country}
           onChange={handleChange}
         />
-        <button
+        <Button
           type="submit"
-          className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded w-full"
+          className="py-2 px-4  w-full"
         >
           Register
-        </button>
+        </Button>
       </form>
     </div>
   );

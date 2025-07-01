@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col items-center justify-center bg-white dark:bg-gray-800 py-4">
+    <footer className="flex flex-col items-center justify-center bg-white dark:bg-gray-800 py-4 w-full">
       <p>© {new Date().getFullYear()} Movie Zone</p>
       <Link href="https://github.com/devbn3li">devbn3li</Link>
     </footer>
