@@ -1,4 +1,4 @@
-name: Deploy Frontend to VM
+name: Fast Frontend Deploy
 
 on:
   push:
@@ -10,7 +10,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy via SSH
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Check if package.json changed
+        id: check_pkg
+        run: |
+          git fetch origin main --depth=2
+          CHANGED=$(git diff --name-only HEAD^ HEAD)
+          echo "$CHANGED"
+          
+          if echo "$CHANGED" | grep -q 'package.json'; then
+            echo "INSTALL_NEEDED=true" >> $GITHUB_ENV
+          else
+            echo "INSTALL_NEEDED=false" >> $GITHUB_ENV
+          fi
+
+      - name: Deploy to VM
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: 74.234.195.22
@@ -19,8 +35,14 @@ jobs:
           script: |
             cd movies-frontend
             git pull
-            npm install
+
+            if [ "$INSTALL_NEEDED" = "true" ]; then
+              echo "package.json changed → running npm install..."
+              npm install
+            else
+              echo "No package change → skipping install"
+            fi
+
             npm run build
-            pm2 delete movies-frontend || true
-            pm2 start npm --name "movies-frontend" -- run start
+            pm2 restart movies-frontend || pm2 start npm --name "movies-frontend" -- run start
             pm2 save
