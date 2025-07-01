@@ -16,6 +16,8 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { LuLogOut } from "react-icons/lu";
 import { Button } from "@/components/ui/button";
+import { CgProfile } from "react-icons/cg";
+import { RxDashboard } from "react-icons/rx";
 
 export default function Navbar() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -66,6 +68,7 @@ export default function Navbar() {
                 <Link href="/profile" passHref>
                   <DropdownMenuItem>
                     Profile
+                    <DropdownMenuShortcut><CgProfile /></DropdownMenuShortcut>
                   </DropdownMenuItem>
                 </Link>
 
@@ -73,6 +76,7 @@ export default function Navbar() {
                   <Link href="/dashboard" passHref>
                     <DropdownMenuItem>
                       Dashboard
+                      <DropdownMenuShortcut><RxDashboard /></DropdownMenuShortcut>
                     </DropdownMenuItem>
                   </Link>
                 )}

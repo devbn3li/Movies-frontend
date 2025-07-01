@@ -19,7 +19,7 @@ import Image from "next/image";
 import mediaData from "@/assets/moviesdb.json";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Movie, TVShow } from "@/types/index"; 
+import { Movie, TVShow } from "@/types/index";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -58,7 +58,7 @@ export default function HomePage() {
   );
 
   return (
-    <div className="p-5 sm:px-20">
+    <div className="p-5 sm:px-20 pb-20 flex flex-col">
       <Tabs
         defaultValue="movies"
         onValueChange={(val) => {
@@ -66,22 +66,26 @@ export default function HomePage() {
           setPage(1);
           setSearch("");
         }}
-        
-      >
-        <TabsList className="w-full flex justify-center gap-5 px-[5px]">
-          <TabsTrigger value="movies">Movies</TabsTrigger>
-          <TabsTrigger value="tv">TV Shows</TabsTrigger>
-        </TabsList>
 
-        <div className="my-4">
-          <Input
-            placeholder="Search..."
-            value={search}
-            onChange={(e) => {
-              setSearch(e.target.value);
-              setPage(1);
-            }}
-          />
+      >
+        <div className="flex max-md:flex-col justify-between items-center mb-4 gap-5">
+          <TabsList className="max-md:w-full flex justify-center gap-5 px-[5px]">
+            <TabsTrigger value="movies">Movies</TabsTrigger>
+            <TabsTrigger value="tv">TV Shows</TabsTrigger>
+          </TabsList>
+
+            <Input
+              placeholder="Search..."
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
+                setPage(1);
+              }}
+              className="w-full max-w-sm"
+              type="search"
+              autoComplete="on"
+              disabled={isLoading}
+            />
         </div>
 
         <TabsContent value="movies">
