@@ -190,7 +190,7 @@ function CardsGrid({
           <Link
             href={`/movies/${item.id}`}
             key={item.id}
-            className="flex flex-col justify-center items-center bg-white dark:bg-black rounded-lg p-3 w-fit"
+            className="flex flex-col justify-center items-center bg-white dark:bg-black rounded-lg p-3 w-fit mx-auto"
           >
             <Image
               src={item.poster_url}
