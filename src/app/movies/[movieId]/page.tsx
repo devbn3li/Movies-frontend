@@ -1,61 +1,42 @@
 "use client";
-import axios from "@/lib/axios";
-import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
-import defmovie from "../../../../public/Images/movie.jpg";
+import mediaData from "@/assets/moviesdb.json";
+import { notFound } from "next/navigation";
+import { Movie, TVShow } from "@/types/index";
 
-type Movie = {
-  _id: string;
-  title: string;
-  description: string;
-  posterUrl: string;
-  type: string;
-  language: string;
-  genre: string[];
-  length: number;
-  cast: string[];
-  averageRating?: number;
-};
+type Media = Movie | TVShow;
 
 export default function MoviePage() {
   const { movieId } = useParams();
-  const [movie, setMovie] = useState<Movie | null>(null);
 
-  useEffect(() => {
-    const fetchMovie = async () => {
-      try {
-        const response = await axios.get(`/movies/${movieId}`);
-        setMovie(response.data);
-      } catch (error) {
-        console.error("Failed to fetch movie", error);
-      }
-    };
+  const { movies, tv_shows } = mediaData as {
+    movies: Movie[];
+    tv_shows: TVShow[];
+  };
 
-    if (movieId) {
-      fetchMovie();
-    }
-  }, [movieId]);
+  const all: Media[] = [...movies, ...tv_shows];
+  const item = all.find((m) => m.id === Number(movieId));
 
-  if (!movie) return <div>Loading...</div>;
+  if (!item) return notFound();
 
+  const title = "title" in item ? item.title : item.name;
   return (
-    <div className="flex flex-col items-center p-6">
+    <div className="flex flex-col items-center p-6 w-[520px] mx-auto">
       <div className="mb-4">
         <Image
-          src={movie.posterUrl || defmovie}
-          alt={movie.title}
+          src={item.backdrop_url || item.poster_url}
+          alt={title}
           className="object-cover rounded mb-4"
-          width={300}
+          width={500}
+          height={300}
         />
       </div>
-      <div className="flex justify-between gap-5">
-        <h1 className="text-3xl font-bold mb-4">{movie.title}</h1>
-        <span className="text-sm text-yellow-600">⭐ {typeof movie.averageRating === "number" ? movie.averageRating.toFixed(1) : "0.0"}</span>
+      <div className="flex items-center justify-between gap-5 mb-4 w-full">
+        <h1 className="text-2xl font-bold">{title}</h1>
+        <span className="text-xl text-yellow-600">⭐ {typeof item.vote_average === "number" ? item.vote_average.toFixed(1) : "0.0"}</span>
       </div>
-      <p className="text-sm mb-1">{movie.type.toUpperCase()} | {movie.language} | {movie.length} {movie.type === "movie" ? "min" : "Eposide"}</p>
-      <p className="mb-2">{movie.description}</p>
-      <p>{movie.cast.join(", ")}</p>
+      <p className="mb-2">{item.overview}</p>
     </div>
   );
 }
