@@ -193,7 +193,7 @@ function CardsGrid({
       >
         {items.filter((item) => !!item.poster_url).map((item) => (
           <Link
-            href={`/movies/${item.id}`}
+            href={`/movie/${item.id}`}
             key={item.id}
             className="flex flex-col justify-center items-center bg-white dark:bg-black rounded-lg p-3 mx-auto"
           >
