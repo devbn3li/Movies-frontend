@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Loading from "@/components/Loading";
 
 const Profile = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -13,7 +14,7 @@ const Profile = () => {
     }
   }, []);
 
-  if (!user) return <p>Loading...</p>;
+  if (!user) return <Loading />;
 
   return (
     <div className="flex flex-col justify-start items-center p-6">

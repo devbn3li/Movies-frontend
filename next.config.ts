@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
         hostname: "moviezonee.mooo.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "i.ibb.co",
+        pathname: "/**",
+      },
     ],
   },
 };
