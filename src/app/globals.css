@@ -117,3 +117,10 @@
     @apply bg-background text-foreground;
   }
 }
+
+.sidebar-trigger {
+  position: absolute;
+  top: 1.3rem;
+  left: 1rem;
+  z-index: 1000;
+}
