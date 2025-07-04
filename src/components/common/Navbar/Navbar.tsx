@@ -51,13 +51,18 @@ export default function Navbar() {
         {user ? (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Image
-                src={user.avatar || "/Images/default.svg"}
-                alt="Avatar"
-                width={36}
-                height={36}
-                className="rounded-full border cursor-pointer"
-              />
+              {user.profilePicture ? (
+                <Image
+                  src={user.profilePicture}
+                  alt="Avatar"
+                  width={36}
+                  height={36}
+                  className="rounded-full border cursor-pointer w-10 h-10"
+                />) : (
+                <div className="w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center cursor-pointer">
+                  <span className="text-gray-500 dark:text-gray-400 text-2xl font-bold">{user.name.slice(0, 1)}</span>
+                </div>
+              )}
             </DropdownMenuTrigger>
 
             <DropdownMenuContent className="w-56" align="end">

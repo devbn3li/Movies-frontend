@@ -17,14 +17,19 @@ const Profile = () => {
 
   return (
     <div className="flex flex-col justify-start items-center p-6">
-      <Image
-        src={user.avatar || "/Images/default.svg"}
-        alt="Avatar"
-        width={200}
-        height={200}
-        className="rounded-full border cursor-pointer"
-
-      />
+      {user.profilePicture ? (
+        <Image
+          src={user.profilePicture}
+          alt="Avatar"
+          width={200}
+          height={200}
+          className="rounded-full border cursor-pointer"
+        />
+      ) : (
+        <div className="w-48 h-48 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center">
+          <span className="text-gray-500 dark:text-gray-400 text-9xl font-bold">{user.name.slice(0, 1)}</span>
+        </div>
+      )}
       <p className="text-gray-700 dark:text-gray-300 text-4xl font-bold mt-2">{user.name}</p>
       <p className="text-gray-700 dark:text-gray-300">{user.email}</p>
       <p className="text-gray-700 dark:text-gray-300">{user.country}</p>
