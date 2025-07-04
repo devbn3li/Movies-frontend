@@ -40,7 +40,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="p-4 flex justify-between items-center border-b border-[#333333] sm:px-20 sticky top-0 bg-black/70 backdrop-blur-md shadow-xl z-50">
+    <div className="p-4 flex justify-between bg-white items-center border-b dark:border-[#333333] sm:px-20 sticky top-0 dark:bg-black/70 dark:backdrop-blur-md dark:shadow-xl z-50">
       <Link href="/" className="text-xl font-bold max-sm:ml-8">
         Movie Zone
       </Link>

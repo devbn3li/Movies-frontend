@@ -20,6 +20,7 @@ import mediaData from "@/assets/moviesdb.json";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Movie, TVShow } from "@/types/index";
+import Loading from "@/components/Loading";
 
 const ITEMS_PER_PAGE = 24;
 
@@ -74,18 +75,18 @@ export default function HomePage() {
             <TabsTrigger value="tv">TV Shows</TabsTrigger>
           </TabsList>
 
-            <Input
-              placeholder="Search..."
-              value={search}
-              onChange={(e) => {
-                setSearch(e.target.value);
-                setPage(1);
-              }}
-              className="w-full max-w-sm"
-              type="search"
-              autoComplete="on"
-              disabled={isLoading}
-            />
+          <Input
+            placeholder="Search..."
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setPage(1);
+            }}
+            className="w-full max-w-sm"
+            type="search"
+            autoComplete="on"
+            disabled={isLoading}
+          />
         </div>
 
         <TabsContent value="movies">
@@ -97,7 +98,7 @@ export default function HomePage() {
         </TabsContent>
       </Tabs>
 
-      <div className="flex justify-center w-full">
+      {!isLoading && filtered.length > ITEMS_PER_PAGE && (<div className="flex justify-center w-full">
         <Pagination className="w-full max-w-3xl">
           <PaginationContent>
             {page > 1 && (
@@ -143,7 +144,7 @@ export default function HomePage() {
             )}
           </PaginationContent>
         </Pagination>
-      </div>
+      </div>)}
     </div>
   );
 }
@@ -156,6 +157,10 @@ function CardsGrid({
   type: "movie" | "tv";
   isLoading: boolean;
 }) {
+  if (!items) {
+    return <Loading />;
+  }
+
   if (isLoading) {
     // Render 12 skeleton cards to match ITEMS_PER_PAGE
     return (
@@ -178,6 +183,14 @@ function CardsGrid({
             </div>
           ))}
         </div>
+      </div>
+    );
+  }
+
+  if (items.length === 0) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <p className="text-gray-500">No results found</p>
       </div>
     );
   }

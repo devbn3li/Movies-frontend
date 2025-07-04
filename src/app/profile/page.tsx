@@ -17,7 +17,7 @@ const Profile = () => {
   if (!user) return <Loading />;
 
   return (
-    <div className="flex flex-col justify-start items-center p-6">
+    <div className="flex flex-col items-center p-6 pt-10">
       {user.profilePicture ? (
         <Image
           src={user.profilePicture}

@@ -49,18 +49,20 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <SidebarProvider>
-            <div className="flex flex-col justify-between min-h-screen w-full">
+            <div className="min-h-screen w-full">
               <div className="relative ">
                 <div className="fixed top-0 left-0 w-full z-50">
-                <SidebarTrigger className="sidebar-trigger" />
+                  <SidebarTrigger className="sidebar-trigger" />
                   <Navbar />
                 </div>
               </div>
               <AppSidebar />
-              <div className="pt-16">
+              <div className="pt-16 min-h-[calc(100vh-5.07rem)]">
                 {children}
               </div>
-              <Footer />
+              <div className="relative bottom-0 w-full">
+                <Footer />
+              </div>
             </div>
           </SidebarProvider>
         </ThemeProvider>
