@@ -21,7 +21,7 @@ import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Movie, TVShow } from "@/types/index";
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 24;
 
 export default function HomePage() {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -185,9 +185,9 @@ function CardsGrid({
   return (
     <div className="w-full flex justify-center">
       <div
-        className="grid gap-6 justify-center"
+        className="grid justify-center px-20 pb-20"
         style={{
-          gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fill, minmax(230px, 1fr))",
           width: "100%",
         }}
       >
@@ -200,18 +200,10 @@ function CardsGrid({
             <Image
               src={item.poster_url}
               alt={"title" in item ? item.title : item.name}
-              width={330}
-              height={450}
-              className="rounded object-cover mb-2"
+              width={230}
+              height={340}
+              className="rounded-2xl object-cover mb-2 hover:scale-105 transition-transform duration-300 ease-in-out"
             />
-            <div className="flex flex-col items-center">
-              <h2 className="font-semibold text-lg text-center">
-                {"title" in item ? item.title : item.name}
-              </h2>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                {item.vote_average.toFixed(1)}
-              </p>
-            </div>
           </Link>
         ))}
       </div>

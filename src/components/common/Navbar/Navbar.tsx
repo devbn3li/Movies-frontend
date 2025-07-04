@@ -40,7 +40,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="p-4 flex justify-between items-center border-b border-[#333333] sm:px-20 sticky top-0 dark:bg-black bg-white z-50">
+    <div className="p-4 flex justify-between items-center border-b border-[#333333] sm:px-20 sticky top-0 bg-black/70 backdrop-blur-md shadow-xl z-50">
       <Link href="/" className="text-xl font-bold max-sm:ml-8">
         Movie Zone
       </Link>
@@ -52,7 +52,7 @@ export default function Navbar() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Image
-                src={user.avatar || "/Images/default.png"}
+                src={user.avatar || "/Images/default.svg"}
                 alt="Avatar"
                 width={36}
                 height={36}

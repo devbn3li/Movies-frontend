@@ -18,7 +18,7 @@ const Profile = () => {
   return (
     <div className="flex flex-col justify-start items-center p-6">
       <Image
-        src={user.avatar || "/Images/default.png"}
+        src={user.avatar || "/Images/default.svg"}
         alt="Avatar"
         width={200}
         height={200}

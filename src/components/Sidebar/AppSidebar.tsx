@@ -63,7 +63,7 @@ const Categories = [
 
 export function AppSidebar() {
   return (
-    <Sidebar  className="fixed top-[64px] left-0 z-40 h-[calc(100vh-64px)] w-64">
+    <Sidebar  className="fixed top-[64px] left-0 z-40 h-[calc(100vh-64px)] w-64 ">
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>
