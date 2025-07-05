@@ -17,6 +17,7 @@ jobs:
           username: azureuser
           key: ${{ secrets.VMKEY }}
           script: |
+            set -e
             cd movies-frontend
             git pull
             npm install
