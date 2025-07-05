@@ -15,9 +15,9 @@ interface Movie {
   poster_path: string | null;
 }
 
-const TrendingNow = ({ type }: { type: "movie" | "tv" }) => {
+const TrendingNow = ({ type, title, isLarge }: { type: "movie" | "tv"; title: string; isLarge: boolean }) => {
   const [trendingMovies, setTrendingMovies] = useState<Movie[]>([]);
-  
+
   useEffect(() => {
     console.log("Trending movie IDs:", trendingMovies.map(m => m.id));
   }, [trendingMovies]);
@@ -44,9 +44,9 @@ const TrendingNow = ({ type }: { type: "movie" | "tv" }) => {
   if (!trendingMovies.length) return null;
 
   return (
-    <div className="max-w-[1080px] w-full mt-10 relative px-2">
+    <div className={`${isLarge ? "w-full" : "max-w-[1080px]"} w-full mt-10 relative px-2`}>
       <h2 className="text-[24px] sm:text-[28px] md:text-[32px] font-bold text-white mb-4">
-        Trending Now
+        Trending {title ? title : "Now"}
       </h2>
 
       <Carousel opts={{ align: "center" }} className="w-full relative">
@@ -57,14 +57,16 @@ const TrendingNow = ({ type }: { type: "movie" | "tv" }) => {
               className="
                 basis-[90%] 
                 sm:basis-[50%] 
-                md:basis-[33.33%] 
+                md:basis-[33.33%]
+                lg:basis-[25%]
+                xl:basis-[20%]
                 flex justify-center
               "
             >
               <Link href={`/movie/${movie.id}`} className="p-2">
                 <Image
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  alt={movie.title}
+                  alt={movie.title || "Trending Movie"}
                   className="object-cover h-auto rounded-2xl hover:scale-105 transition-transform duration-300"
                   width={280}
                   height={420}

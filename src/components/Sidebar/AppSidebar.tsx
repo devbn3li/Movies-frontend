@@ -22,13 +22,13 @@ const items = [
     icon: Home,
   },
   {
-    title: "Latest Movies",
-    url: "#",
+    title: "Movies",
+    url: "/main-movies",
     icon: BiMoviePlay,
   },
   {
-    title: "Latest TV Shows",
-    url: "#",
+    title: "TV Shows",
+    url: "/main-series",
     icon: MdLiveTv,
   },
 ]
