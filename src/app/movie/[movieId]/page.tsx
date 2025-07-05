@@ -6,6 +6,8 @@ import mediaData from "@/assets/moviesdb.json";
 import { notFound } from "next/navigation";
 import { Movie, TVShow } from "@/types/index";
 import { useMemo } from "react";
+import MayLike from "@/components/MayLike";
+import TrendingNow from "@/components/TrendingNow";
 
 type Media = Movie | TVShow;
 
@@ -32,6 +34,7 @@ export default function MoviePage() {
   const original_title = "original_title" in item ? item.original_title : item.original_name;
   const poster = item.poster_url || "/placeholder.jpg";
   const backdrop = item.backdrop_url || poster;
+  const mediaType = "title" in item ? "movie" : "tv";
 
   return (
     <div className="relative min-h-[calc(100vh-5.07rem)] mb-20">
@@ -60,7 +63,7 @@ export default function MoviePage() {
             <Image
               src={poster}
               alt={title}
-              className="object-cover mb-4 aspect-[2/3] rounded-2xl shadow-xl"
+              className="object-cover mb-4 aspect-[2/3] rounded-2xl h-auto"
               width={400}
               height={600}
             />
@@ -148,6 +151,8 @@ export default function MoviePage() {
           </div>
         </div>
 
+        {movieId && <MayLike movieId={movieId} type={mediaType} />}
+        {movieId && <TrendingNow type={mediaType} />}
       </div>
     </div>
   );

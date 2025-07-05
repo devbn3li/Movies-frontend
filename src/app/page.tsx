@@ -215,7 +215,7 @@ function CardsGrid({
               alt={"title" in item ? item.title : item.name}
               width={230}
               height={340}
-              className="rounded-2xl object-cover mb-2 hover:scale-105 transition-transform duration-300 ease-in-out"
+              className="rounded-2xl object-cover h-auto mb-2 hover:scale-105 transition-transform duration-300 ease-in-out"
             />
           </Link>
         ))}
