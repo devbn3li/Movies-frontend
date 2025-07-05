@@ -152,7 +152,7 @@ export default function MoviePage() {
         </div>
 
         {movieId && <MayLike movieId={movieId} type={mediaType} />}
-        {movieId && <TrendingNow type={mediaType} />}
+        {movieId && <TrendingNow title={"Now"} type={mediaType} isLarge={false} />}
       </div>
     </div>
   );
