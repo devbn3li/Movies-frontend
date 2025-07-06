@@ -3,11 +3,11 @@ import mediaData from "@/assets/moviesdb.json";
 import { Movie, TVShow } from "@/types/index";
 import MoviePage from "./MoviePage";
 
-type Props = {
+type PageProps = {
   params: { movieId: string };
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { movies, tv_shows } = mediaData as {
     movies: Movie[];
     tv_shows: TVShow[];
@@ -44,6 +44,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function Page({ params }: Props) {
+export default function Page({ params }: PageProps) {
   return <MoviePage movieId={String(params.movieId)} />;
 }
