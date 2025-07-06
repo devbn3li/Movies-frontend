@@ -15,6 +15,8 @@ import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Movie } from "@/types/index";
 import Loading from "@/components/Loading";
+import Head from "next/head";
+
 
 const ITEMS_PER_PAGE = 24;
 
@@ -48,7 +50,19 @@ export default function MoviesPage() {
   );
 
   return (
-    <div className="p-5 sm:px-20 pb-20 flex flex-col pt-15">
+    <>
+      <Head>
+        <title>Movies - MovieZone</title>
+        <meta name="description" content="Explore our wide collection of movies, search and paginate through your favorites." />
+        <meta property="og:title" content="Movies - MovieZone" />
+        <meta property="og:description" content="Browse trending and popular movies on MovieZone." />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://moviezonee.mooo.com/movies" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Movies - MovieZone" />
+        <meta name="twitter:description" content="Find your next favorite movie now." />
+      </Head>
+      <div className="p-5 sm:px-20 pb-20 flex flex-col pt-15">
         <div className="flex w-full justify-center items-center mb-4 gap-5">
 
           <Input
@@ -66,57 +80,58 @@ export default function MoviesPage() {
         </div>
 
 
-          <CardsGrid items={paginated} type="movie" isLoading={isLoading} />
+        <CardsGrid items={paginated} type="movie" isLoading={isLoading} />
 
 
-      {!isLoading && filtered.length > ITEMS_PER_PAGE && (<div className="flex justify-center w-full">
-        <Pagination className="w-full max-w-3xl">
-          <PaginationContent>
-            {page > 1 && (
-              <PaginationItem>
-                <PaginationPrevious href="#" onClick={() => setPage(page - 1)} />
-              </PaginationItem>
-            )}
-            {Array.from({ length: totalPages }).map((_, idx) => {
-              const pageNum = idx + 1;
-              const shouldShow =
-                pageNum === 1 ||
-                pageNum === totalPages ||
-                Math.abs(pageNum - page) <= 1;
-              const isEllipsisBefore = pageNum === page - 2 && pageNum !== 1;
-              const isEllipsisAfter = pageNum === page + 2 && pageNum !== totalPages;
+        {!isLoading && filtered.length > ITEMS_PER_PAGE && (<div className="flex justify-center w-full">
+          <Pagination className="w-full max-w-3xl">
+            <PaginationContent>
+              {page > 1 && (
+                <PaginationItem>
+                  <PaginationPrevious href="#" onClick={() => setPage(page - 1)} />
+                </PaginationItem>
+              )}
+              {Array.from({ length: totalPages }).map((_, idx) => {
+                const pageNum = idx + 1;
+                const shouldShow =
+                  pageNum === 1 ||
+                  pageNum === totalPages ||
+                  Math.abs(pageNum - page) <= 1;
+                const isEllipsisBefore = pageNum === page - 2 && pageNum !== 1;
+                const isEllipsisAfter = pageNum === page + 2 && pageNum !== totalPages;
 
-              if (isEllipsisBefore || isEllipsisAfter) {
+                if (isEllipsisBefore || isEllipsisAfter) {
+                  return (
+                    <PaginationItem key={`ellipsis-${pageNum}`}>
+                      <span className="px-2 text-gray-500">...</span>
+                    </PaginationItem>
+                  );
+                }
+
+                if (!shouldShow) return null;
+
                 return (
-                  <PaginationItem key={`ellipsis-${pageNum}`}>
-                    <span className="px-2 text-gray-500">...</span>
+                  <PaginationItem key={pageNum}>
+                    <PaginationLink
+                      href="#"
+                      isActive={page === pageNum}
+                      onClick={() => setPage(pageNum)}
+                    >
+                      {pageNum}
+                    </PaginationLink>
                   </PaginationItem>
                 );
-              }
-
-              if (!shouldShow) return null;
-
-              return (
-                <PaginationItem key={pageNum}>
-                  <PaginationLink
-                    href="#"
-                    isActive={page === pageNum}
-                    onClick={() => setPage(pageNum)}
-                  >
-                    {pageNum}
-                  </PaginationLink>
+              })}
+              {page < totalPages && (
+                <PaginationItem>
+                  <PaginationNext href="#" onClick={() => setPage(page + 1)} />
                 </PaginationItem>
-              );
-            })}
-            {page < totalPages && (
-              <PaginationItem>
-                <PaginationNext href="#" onClick={() => setPage(page + 1)} />
-              </PaginationItem>
-            )}
-          </PaginationContent>
-        </Pagination>
-      </div>)}
-    </div>
+              )}
+            </PaginationContent>
+          </Pagination>
+        </div>)}
+      </div>
+    </>
   );
 }
 
