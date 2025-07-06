@@ -47,6 +47,9 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
   },
+  pinterest: {
+    richPin: true
+  },
 };
 
 export default function RootLayout({
