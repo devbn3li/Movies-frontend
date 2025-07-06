@@ -20,15 +20,32 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Movie App",
+  title: "Movie Zone",
   description: "Watch your favorite movies and TV shows",
   keywords: ["movies", "TV shows", "streaming", "entertainment"],
   authors: [{ name: "Mohamed Ali", url: "https://github.com/devbn3li/" }],
   openGraph: {
-    title: "Movie App",
-    description: "Watch your favorite movies and TV shows",
+    title: "Movie Zone",
+    description: "Watch your favorite movies and TV shows for free, no ads, no interruptions, just pure entertainment.",
     url: "https://moviezonee.mooo.com/",
     type: "website",
+    images: [
+      {
+        url: "https://moviezonee.mooo.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Movie Zone OG Image",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Movie Zone",
+    description: "Watch your favorite movies and TV shows for free, no ads, no interruptions, just pure entertainment.",
+    images: ["https://moviezonee.mooo.com/og-image.png"],
+  },
+  icons: {
+    icon: "/favicon.ico",
   },
 };
 
