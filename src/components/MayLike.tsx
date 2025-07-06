@@ -38,7 +38,7 @@ useEffect(() => {
         setSimilarMovies(filtered);
       })
       .catch(err => console.error(err));
-  }, [movieId]);
+  }, [movieId, type]);
 
   if (!similarMovies.length) return null;
 

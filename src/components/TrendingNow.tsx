@@ -39,7 +39,7 @@ const TrendingNow = ({ type, title, isLarge }: { type: "movie" | "tv"; title: st
         setTrendingMovies(filtered);
       })
       .catch(err => console.error(err));
-  }, []);
+  }, [type]);
 
   if (!trendingMovies.length) return null;
 
