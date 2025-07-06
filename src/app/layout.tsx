@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Mohamed Ali", url: "https://github.com/devbn3li/" }],
   openGraph: {
     title: "Movie Zone",
-    description: "Watch your favorite movies and TV shows for free, no ads, no interruptions, just pure entertainment.",
+    description: "Watch your favorite movies and TV shows for free, no ads, no interruptions.",
     url: "https://moviezonee.mooo.com/",
     type: "website",
     images: [
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Movie Zone",
-    description: "Watch your favorite movies and TV shows for free, no ads, no interruptions, just pure entertainment.",
+    description: "Watch your favorite movies and TV shows for free, no ads, no interruptions.",
     images: ["https://moviezonee.mooo.com/og-image.png"],
   },
   icons: {
