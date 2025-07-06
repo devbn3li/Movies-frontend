@@ -57,7 +57,7 @@ export default function MoviesPage() {
         <meta property="og:title" content="Movies - MovieZone" />
         <meta property="og:description" content="Browse trending and popular movies on MovieZone." />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://moviezonee.mooo.com/movies" />
+        <meta property="og:url" content="https://moviezonee.mooo.com/main-movies" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Movies - MovieZone" />
         <meta name="twitter:description" content="Find your next favorite movie now." />
