@@ -4,7 +4,7 @@ import { Movie, TVShow } from "@/types/index";
 import MoviePage from "./MoviePage";
 
 type Props = {
-  params: { movieId: number };
+  params: { movieId: number | string };
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -45,5 +45,5 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default function Page({ params }: Props) {
-  return <MoviePage movieId={params.movieId} />;
+  return <MoviePage movieId={String(params.movieId)} />;
 }

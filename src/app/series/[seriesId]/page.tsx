@@ -150,7 +150,7 @@ export default function SeriesPage() {
           </div>
         </div>
 
-        {seriesId && <MayLike movieId={seriesId} type={mediaType} />}
+        {seriesId && <MayLike movieId={String(seriesId)} type={mediaType} />}
         {seriesId && <TrendingNow title={"Now"} type={mediaType} isLarge={false} />}
       </div>
     </div>

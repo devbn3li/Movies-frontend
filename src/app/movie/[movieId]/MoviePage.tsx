@@ -11,7 +11,7 @@ import Head from "next/head";
 
 type Media = Movie | TVShow;
 
-export default function MoviePage({ movieId }: { movieId: number }) {
+export default function MoviePage({ movieId }: { movieId: string }) {
   const id = useMemo(() => Number(movieId), [movieId]);
 
   const { movies, tv_shows } = mediaData as {

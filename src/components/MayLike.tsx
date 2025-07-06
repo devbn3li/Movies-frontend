@@ -10,12 +10,12 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 
 interface Movie {
-  id: number;
+  id: string;
   title: string;
   poster_path: string | null;
 }
 
-const MayLike = ({ movieId, type }: { movieId: number; type: "movie" | "tv" }) => {
+const MayLike = ({ movieId, type }: { movieId: string; type: "movie" | "tv" }) => {
   const [similarMovies, setSimilarMovies] = useState<Movie[]>([]);
 useEffect(() => {
   console.log("Similar movie IDs:", similarMovies.map(m => m.id));
