@@ -6,7 +6,6 @@ import Navbar from "@/components/common/Navbar/Navbar";
 import Footer from "@/components/common/Footer/Footer";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/Sidebar/AppSidebar";
-import Head from "next/head";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -48,6 +47,16 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
   },
+  other: {
+    "application/ld+json": JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Movie",
+      name: "Movie Zone",
+      description: "Watch your favorite movies and TV shows for free, no ads, no interruptions.",
+      url: "https://moviezonee.mooo.com/",
+      image: "https://moviezonee.mooo.com/og-image.png",
+    }),
+  },
 };
 
 export default function RootLayout({
@@ -57,22 +66,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <Head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Movie",
-              "name": "Movie Zone",
-              "description":
-                "Watch your favorite movies and TV shows for free, no ads, no interruptions.",
-              "url": "https://moviezonee.mooo.com/",
-              "image": "https://moviezonee.mooo.com/og-image.png",
-            }),
-          }}
-        />
-      </Head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
@@ -85,16 +78,14 @@ export default function RootLayout({
         >
           <SidebarProvider>
             <div className="min-h-screen w-full">
-              <div className="relative ">
+              <div className="relative">
                 <div className="fixed top-0 left-0 w-full z-50">
                   <SidebarTrigger className="sidebar-trigger" />
                   <Navbar />
                 </div>
               </div>
               <AppSidebar />
-              <div className="pt-16 min-h-[calc(100vh-5.07rem)]">
-                {children}
-              </div>
+              <div className="pt-16 min-h-[calc(100vh-5.07rem)]">{children}</div>
               <div className="relative bottom-0 w-full">
                 <Footer />
               </div>

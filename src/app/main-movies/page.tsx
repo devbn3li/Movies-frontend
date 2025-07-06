@@ -1,5 +1,4 @@
-"use client";
-import { useState, useEffect } from "react";
+import type { Metadata } from "next";
 import { Input } from "@/components/ui/input";
 import {
   Pagination,
@@ -12,11 +11,35 @@ import {
 import Image from "next/image";
 import moviesData from "@/assets/movies.json";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Movie } from "@/types/index";
 import Loading from "@/components/Loading";
-import Head from "next/head";
 
+export const metadata: Metadata = {
+  title: "Movies - Movie Zone",
+  description: "Browse the best movies available on Movie Zone.",
+  openGraph: {
+    title: "Movies - Movie Zone",
+    description: "Browse the best movies available on Movie Zone.",
+    url: "https://moviezonee.mooo.com/main-movies",
+    type: "website",
+    images: [
+      {
+        url: "https://moviezonee.mooo.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Movies Page OG Image",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Movies - Movie Zone",
+    description: "Browse the best movies available on Movie Zone.",
+    images: ["https://moviezonee.mooo.com/og-image.png"],
+  },
+};
 
 const ITEMS_PER_PAGE = 24;
 
@@ -26,7 +49,6 @@ export default function MoviesPage() {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
 
-  // Simulate loading data (since moviesdb.json is static)
   useEffect(() => {
     const loadData = async () => {
       setIsLoading(true);
@@ -37,11 +59,9 @@ export default function MoviesPage() {
     loadData();
   }, []);
 
-  const data = movies;
-
-  const filtered = data.filter((item) => {
-    return item.title.toLowerCase().includes(search.toLowerCase());
-  });
+  const filtered = movies.filter((item) =>
+    item.title.toLowerCase().includes(search.toLowerCase())
+  );
 
   const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
   const paginated = filtered.slice(
@@ -50,40 +70,26 @@ export default function MoviesPage() {
   );
 
   return (
-    <>
-      <Head>
-        <title>Movies - MovieZone</title>
-        <meta name="description" content="Explore our wide collection of movies, search and paginate through your favorites." />
-        <meta property="og:title" content="Movies - MovieZone" />
-        <meta property="og:description" content="Browse trending and popular movies on MovieZone." />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://moviezonee.mooo.com/main-movies" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Movies - MovieZone" />
-        <meta name="twitter:description" content="Find your next favorite movie now." />
-      </Head>
-      <div className="p-5 sm:px-20 pb-20 flex flex-col pt-15">
-        <div className="flex w-full justify-center items-center mb-4 gap-5">
+    <div className="p-5 sm:px-20 pb-20 flex flex-col pt-15">
+      <div className="flex w-full justify-center items-center mb-4 gap-5">
+        <Input
+          placeholder="Search..."
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setPage(1);
+          }}
+          className="w-full sm:mx-25"
+          type="search"
+          autoComplete="on"
+          disabled={isLoading}
+        />
+      </div>
 
-          <Input
-            placeholder="Search..."
-            value={search}
-            onChange={(e) => {
-              setSearch(e.target.value);
-              setPage(1);
-            }}
-            className="w-full sm:mx-25"
-            type="search"
-            autoComplete="on"
-            disabled={isLoading}
-          />
-        </div>
+      <CardsGrid items={paginated} type="movie" isLoading={isLoading} />
 
-
-        <CardsGrid items={paginated} type="movie" isLoading={isLoading} />
-
-
-        {!isLoading && filtered.length > ITEMS_PER_PAGE && (<div className="flex justify-center w-full">
+      {!isLoading && filtered.length > ITEMS_PER_PAGE && (
+        <div className="flex justify-center w-full">
           <Pagination className="w-full max-w-3xl">
             <PaginationContent>
               {page > 1 && (
@@ -129,9 +135,9 @@ export default function MoviesPage() {
               )}
             </PaginationContent>
           </Pagination>
-        </div>)}
-      </div>
-    </>
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -148,7 +154,6 @@ function CardsGrid({
   }
 
   if (isLoading) {
-    // Render 12 skeleton cards to match ITEMS_PER_PAGE
     return (
       <div className="w-full flex justify-center">
         <div
@@ -158,7 +163,7 @@ function CardsGrid({
             width: "100%",
           }}
         >
-          {Array.from({ length: ITEMS_PER_PAGE }).map((_, index) => (
+          {Array.from({ length: 24 }).map((_, index) => (
             <div
               key={`skeleton-${index}`}
               className="flex flex-col justify-center items-center bg-white dark:bg-black rounded-lg p-3 mx-auto"
