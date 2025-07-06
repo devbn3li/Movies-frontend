@@ -3,11 +3,11 @@ import mediaData from "@/assets/moviesdb.json";
 import { Movie, TVShow } from "@/types/index";
 import MoviePage from "./MoviePage";
 
-type PageProps = {
+export async function generateMetadata({
+  params,
+}: {
   params: { movieId: string };
-};
-
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+}): Promise<Metadata> {
   const { movies, tv_shows } = mediaData as {
     movies: Movie[];
     tv_shows: TVShow[];
@@ -44,6 +44,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default function Page({ params }: PageProps) {
-  return <MoviePage movieId={String(params.movieId)} />;
+export default function Page({
+  params,
+}: {
+  params: { movieId: string };
+}) {
+  return <MoviePage movieId={params.movieId} />;
 }

@@ -17,6 +17,7 @@ interface Movie {
 
 const TrendingNow = ({ type, title, isLarge }: { type: "movie" | "tv"; title: string; isLarge: boolean }) => {
   const [trendingMovies, setTrendingMovies] = useState<Movie[]>([]);
+  const mediaType = type === "movie" ? "movie" : "series";
 
   useEffect(() => {
     console.log("Trending movie IDs:", trendingMovies.map(m => m.id));
@@ -63,7 +64,7 @@ const TrendingNow = ({ type, title, isLarge }: { type: "movie" | "tv"; title: st
                 flex justify-center
               "
             >
-              <Link href={`/movie/${movie.id}`} className="p-2">
+              <Link href={`/${mediaType}/${movie.id}`} className="p-2">
                 <Image
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                   alt={movie.title || "Trending Movie"}
