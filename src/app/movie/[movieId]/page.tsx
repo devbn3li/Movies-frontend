@@ -6,14 +6,15 @@ import MoviePage from "./MoviePage";
 export async function generateMetadata({
   params,
 }: {
-  params: { movieId: string };
+  params: Promise<{ movieId: string }>;
 }): Promise<Metadata> {
+  const { movieId } = await params;
   const { movies, tv_shows } = mediaData as {
     movies: Movie[];
     tv_shows: TVShow[];
   };
 
-  const id = Number(params.movieId);
+  const id = Number(movieId);
   const all = [...movies, ...tv_shows];
   const item = all.find((m) => m.id === id);
   if (!item) return {};
@@ -44,10 +45,11 @@ export async function generateMetadata({
   };
 }
 
-export default function Page({
+export default async function Page({
   params,
 }: {
-  params: { movieId: string };
+  params: Promise<{ movieId: string }>;
 }) {
-  return <MoviePage movieId={params.movieId} />;
+  const { movieId } = await params;
+  return <MoviePage movieId={movieId} />;
 }
