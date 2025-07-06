@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     title: "Movie Zone",
     description: "Watch your favorite movies and TV shows for free, no ads, no interruptions.",
     url: "https://moviezonee.mooo.com/",
-    type: "website",
+    type: "article",
     images: [
       {
         url: "https://moviezonee.mooo.com/og-image.png",

@@ -57,6 +57,8 @@ useEffect(() => {
                 basis-[90%] 
                 sm:basis-[50%] 
                 md:basis-[33.33%] 
+                lg:basis-[25%]
+                xl:basis-[20%]
                 flex justify-center
               "
             >
