@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://moviezonee.mooo.com/
+
+# Sitemaps
+Sitemap: https://moviezonee.mooo.com/sitemap.xml
